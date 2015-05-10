@@ -1,13 +1,15 @@
 ##Reading data
  household_power_consumption <- read.csv("C:/Users/andry/Documents/R/Exploratory Data analysis/exdata_data_household_power_consumption/household_power_consumption.txt", sep=";", stringsAsFactors=FALSE)
+## creating extra column DateTime(needed for plot4 later)
  household_power_consumption$DateTime<-with(household_power_consumption, strptime(paste(Date, Time, sep=" "),"%d/%m/%Y %H:%M:%S"))
 
- str(household_power_consumption)
-
+ str(household_power_consumption) ##check if the data give the correct output(DateTime should be in POSIXlt format)
+## convert Date into Date for subset
  household_power_consumption$Date<-as.Date(household_power_consumption$Date,format="%d/%m/%Y")
-
  head(household_power_consumption)
  str(household_power_consumption)
+## creation of the new clean subsetted data
+
  subdata <- subset(household_power_consumption, household_power_consumption$Date %in% as.Date(c("2007-02-01", "2007-02-02")))
  str(subdata)
 
